@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+
+body{
+   background: rgb(255, 255, 255);
+   margin: 0px auto;
+   max-width: 800px;
+}
+
+*{font-family: Calibri;}
+
+#top{
+   width: 94%; 
+   margin:0px 3%;
+   display: flex;
+   padding:20px 0px;
+   justify-content: center;
+   box-shadow: 0px 1px 1px rgba(182, 182, 182, 0.322);
+}
+
+#header{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 10px;
+   text-align: center;
+   font-weight: bold;
+   color:#363636;
+ 
+   
+
+}
+
+#header img{
+   width: 10%;
+   max-width: 60px;
+   border-radius: 5px;
+}
+
+
+
+
+#year-score{
+   width: 94%;
+   margin: 80px 3% 40px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap:20px;
+   
+}
+
+#year-score input{
+   width: 50px; height: 50px; border: 1px solid #5a94b5; border-radius:5px; background-color: #e7f4f2; text-align: center;
+}
+
+#year-score input:focus{
+   outline: 2px solid #5a94b5; border-radius: 5px;
+}
+
+
+#result{
+   width: 200px; 
+   margin: 0px auto; 
+   background-color: #f7f7f7;
+   border-radius: 5px;
+   display: flex;
+   padding: 10px;
+   font-weight: bold;
+   box-shadow: 0px 0px 5px rgba(182, 182, 182, 0.733);
+}
+
+#names{
+   width: 80%; height:100%; 
+}
+#scores{
+   width: 20%; height:100%; color: rgb(182, 14, 14);
+}
+
+
+#buttons{
+   width: 94%; 
+   margin: 40px 3%;
+   display: flex;
+   justify-content: space-between;
+}
+
+#buttons button{
+   width: 90px; height: 40px; 
+   font-weight: bold; border-radius: 5px; 
+   box-shadow: 0px 1px 1px rgb(161, 160, 160);
+}
+
+#next{
+   background:rgb(6, 151, 144); 
+   color: white; border: none;
+   }
+
+ #back{
+   background: #e7f4f2; 
+   border: 2px solid rgb(6, 151, 144); 
+   color:#363636;
+ }  
+
+
+ #reset{
+   background-color: rgb(190, 22, 16);
+   color: white;
+   border:none;
+ }
+
+</style>
+
+<body>
+    <div id="top">
+        <div id="header"> <img src="icons/questions.png"> <span>SUAL SAYINA GÖRƏ BAL</span></div>
+    </div>
+
+                
+          <div id="year-score">
+            <label for="">Ümumi sual sayı:</label>
+            <input type="text" name="" id="">
+            <label for="">Düzgün cavab sayı:</label>
+            <input type="text" name="" id="">
+          </div>
+       
+          <div id="result">
+            <div id="names">
+              <span>Bal:</span><br>
+              <span>Qiymət:</span><br>
+            </div>
+            <div id="scores">
+              <span>25</span><br>
+              <span>2</span><br>
+            </div>  
+           </div>
+
+    <div id="buttons">
+        <button id="back">GERİ</button>
+        <div>
+            <button id="reset">SIFIRLA</button>
+            <button id="next">HESABLA</button>
+        </div>
+
+    </div>
+
+</body>
+</html>

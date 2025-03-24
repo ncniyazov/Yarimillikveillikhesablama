@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+    
+    body{
+   background: rgb(255, 255, 255);
+   margin: 0px auto;
+   max-width: 800px;
+}
+
+*{font-family: Calibri;}
+
+#top{
+   width: 94%; 
+   margin:0px 3%;
+   display: flex;
+   padding:20px 0px;
+   justify-content: center;
+   box-shadow: 0px 1px 1px rgba(182, 182, 182, 0.322);
+}
+
+#header{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 10px;
+   text-align: center;
+   font-weight: bold;
+   color:#363636;
+
+}
+
+#header img{
+   width: 10%;
+   max-width: 60px;
+   border-radius: 5px;
+}
+
+
+
+#choose-count{
+   width: 94%; height: 60px;
+   margin: 70px 3% 10px 3%;
+   background-color: rgba(139, 64, 64, 0)5);
+   position: relative;
+   display: flex; align-items: center;
+   justify-content: space-between;
+   gap: 5;
+}
+
+#choose-count label{
+   font-weight: bold;
+   word-wrap: break-word;
+   hyphens: auto;
+}
+
+
+.select-number {
+   right:0px;
+   background-color: ;
+   display: flex;
+   align-items: center;
+   font-size: 24px;
+}
+.select-number button {
+   width: 40px;
+   height: 40px;
+   font-size: 24px;
+   cursor: pointer;
+   border: none;
+   border-radius: 5px;
+   padding: 0px;
+   background-color: #5a94b5;
+   color: white;
+}
+.select-number input {
+   width: 50px; height:35px;
+   text-align: center;
+   font-size: 24px;
+   border: none;
+   background-color: rgba(255, 255, 255, 0);
+   color:#363636;
+}
+
+
+#note{
+   margin: 40px auto; height: 50px;
+   display: flex; justify-content: center;
+   align-items: center; color:#363636;
+}
+
+
+#note span{
+   font-style: italic;
+   max-width:70%;
+   text-align: center; 
+
+}
+
+#buttons{
+   width: 94%; 
+   margin: 70px 3%;
+   display: flex;
+   justify-content: space-between;
+}
+
+#buttons button{
+   width: 100px; height: 40px; 
+   font-weight: bold; border-radius: 5px; 
+   box-shadow: 0px 1px 1px rgb(161, 160, 160);
+}
+
+#next{
+   background:rgb(6, 151, 144); 
+   color: white; border: none;
+   }
+
+ #back{
+   background: white; 
+   border: 2px solid rgb(6, 151, 144); 
+   color:#363636;
+ }  
+
+    </style>
+</head>
+<body>
+
+    <div id="top">
+        <div id="header"> <img src="icons/semestr.png"> <span>YARIMİLLİK QİYMƏTLƏNDİRMƏ</span></div>
+    </div>
+
+
+    <div id="choose-count">
+        <label for="">Keçirilmiş summativ qiymətləndirmələrin sayı:</label>
+        <div class="select-number">
+            <button onclick="decrease()">-</button>
+            <input type="text" id="number" value="3" readonly>
+            <button onclick="increase()">+</button>
+        </div>
+    </div>
+    
+    <div id="note">
+        <input type="checkbox">
+        <span>Yarımil ərzində BÖYÜK summativ qiymətləndirmə keçirilmişdir.</span>
+    </div>   
+
+    <div id="buttons">
+        <button id="back">GERİ</button>
+        <button id="next">İRƏLİ</button>
+    </div>
+     
+        
+    
+    
+     
+    <script>
+        let numberInput = document.getElementById("number");
+        
+        function decrease() {
+            let currentValue = parseInt(numberInput.value);
+            if (currentValue > 3) {
+                numberInput.value = currentValue - 1;
+            }
+        }
+        
+        function increase() {
+            let currentValue = parseInt(numberInput.value);
+            if (currentValue < 6) {
+                numberInput.value = currentValue + 1;
+            }
+        }
+    </script>
+
+
+</body>
+</html>

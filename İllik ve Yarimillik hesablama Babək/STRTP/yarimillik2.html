@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+   background: rgb(255, 255, 255);
+   margin: 0px auto;
+   max-width: 800px;
+}
+
+*{font-family: Calibri;}
+
+#top{
+   width: 94%; 
+   margin:0px 3%;
+   display: flex;
+   padding:20px 0px;
+   justify-content: center;
+   box-shadow: 0px 1px 1px rgba(182, 182, 182, 0.322);
+}
+
+#header{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 10px;
+   text-align: center;
+   font-weight: bold;
+   color:#363636;
+
+}
+
+#header img{
+   width: 10%;
+   max-width: 60px;
+   border-radius: 5px;
+}
+
+
+#calc-area{
+   width: 94%;
+   margin: 40px 3% 40px 3%;
+   display: flex;
+   justify-content: space-between;
+   gap:3px;
+}
+
+#calc-area input{
+   min-width: 11%;
+   height: 50px;
+   text-align: center;
+   border: 1px solid #5a94b5;
+   border-radius: 5px;
+   background-color: #e7f4f2;
+}
+
+#calc-area input:focus{outline: 2px solid #5a94b5; border-radius: 5px;}
+
+
+#result{
+   width: 200px; 
+   margin: 0px auto; 
+   background-color: #f7f7f7;
+   border-radius: 5px;
+   display: flex;
+   padding: 10px;
+   font-weight: bold;
+   box-shadow: 0px 0px 5px rgba(182, 182, 182, 0.733);
+}
+
+#names{
+   width: 80%; height:100%; 
+}
+#scores{
+   width: 20%; height:100%; color: rgb(182, 14, 14);
+}
+
+#buttons{
+   width: 94%; 
+   margin: 40px 3%;
+   display: flex;
+   justify-content: space-between;
+}
+
+#buttons button{
+   width: 90px; height: 40px; 
+   font-weight: bold; border-radius: 5px; 
+   box-shadow: 0px 1px 1px rgb(161, 160, 160);
+}
+
+#next{
+   background:rgb(6, 151, 144); 
+   color: white; border: none;
+   }
+
+ #back{
+   background: #e7f4f2; 
+   border: 2px solid rgb(6, 151, 144); 
+   color:#494949;
+ }  
+
+
+ #reset{
+   background-color: rgb(190, 22, 16);
+   color: white;
+   border:none;
+ }
+    </style>
+</head>
+<body>
+    
+    <div id="top">
+        <div id="header"> <img src="icons/semestr.png"> <span>YARIMİLLİK QİYMƏTLƏNDİRMƏ</span></div>
+    </div>
+
+    <div id="calc-area">
+        
+        <input type="text" placeholder="KSQ1" autofocus>
+        <input type="text" placeholder="KSQ2">
+        <input type="text" placeholder="KSQ3">
+        <input type="text" placeholder="KSQ4">
+        <input type="text" placeholder="KSQ5">
+        <input type="text" placeholder="KSQ6">
+        <input type="text" placeholder="BSQ">
+
+    </div>
+
+         <div id="result">
+          <div id="names">
+            <span>Yarımillik bal:</span><br>
+            <span>Yarımillik qiymət:</span><br>
+            <span>KSQ-40%:</span><br>
+            <span>BSQ-60%:</span>
+          </div>
+          <div id="scores">
+            <span>25</span><br>
+            <span>2</span><br>
+            <span>24.4</span><br>
+            <span>0.6</span>
+          </div>  
+         </div>
+
+    <div id="buttons">
+        <button id="back">GERİ</button>
+        <div>
+            <button id="reset">SIFIRLA</button>
+            <button id="next">HESABLA</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
