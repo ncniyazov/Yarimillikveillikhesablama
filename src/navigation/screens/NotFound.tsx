@@ -4,8 +4,8 @@ import { StyleSheet, View } from 'react-native';
 export function NotFound() {
   return (
     <View style={styles.container}>
-      <Text>404</Text>
-      <Button screen="HomeTabs">Go to Home</Button>
+      <Text>404 Səhifə tapılmadı</Text>
+      <Button screen="HomeTabs">Əsas səhifəyə qayıt</Button>
     </View>
   );
 }

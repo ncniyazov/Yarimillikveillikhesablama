@@ -8,18 +8,30 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 import bell from '../assets/bell.png';
 import newspaper from '../assets/newspaper.png';
-import { Home } from './screens/Home';
+import Home from './screens/Home';
+import {YarimillikSecim} from "./screens/YarimillikSecim";
+
+import { YarimilHesablaDefault } from './screens/YarimilHesabla/YarimilHesablaDefault';
 import { Profile } from './screens/Profile';
 import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
+import { IllikHesabla } from './screens/IllikHesabla/IllikHesabla';
+import IllikHeaderComp from './components/IllikHeaderComp';
+import YarimilHeaderComp from './components/YarimilHeaderComp';
+import YarimilSecimHeaderComp from './components/YarimilSecimHeaderComp';
 
 const HomeTabs = createBottomTabNavigator({
   screens: {
     Home: {
+      
       screen: Home,
       options: {
-        title: 'Feed',
+        ScreenOptions: {
+          header: () => <IllikHeaderComp />,
+        },
+        title: 'Əsas səhifə',
+        
         tabBarIcon: ({ color, size }) => (
           <Image
             source={newspaper}
@@ -32,8 +44,8 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
-    Updates: {
-      screen: Updates,
+    Settings: {
+      screen: Settings,
       options: {
         tabBarIcon: ({ color, size }) => (
           <Image
@@ -47,6 +59,21 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
+    // IllikHesabla: {
+    //   screen: IllikHesabla,
+    //   options: {
+    //     tabBarIcon: ({ color, size }) => (
+    //       <Image
+    //         source={bell}
+    //         tintColor={color}
+    //         style={{
+    //           width: size,
+    //           height: size,
+    //         }}
+    //       />
+    //     ),
+    //   },
+    // },
   },
 });
 
@@ -57,6 +84,28 @@ const RootStack = createNativeStackNavigator({
       options: {
         title: 'Home',
         headerShown: false,
+      },
+    },
+    
+    YarimilHesablaDefault: {
+      screen: YarimilHesablaDefault,
+      options: {
+        title: 'YARIMİLLİK QİYMƏTLƏNDİRMƏ',
+        // header: () => <YarimilHeaderComp />,
+      },
+    },
+    IllikHesabla: {
+      screen: IllikHesabla,
+      options: {
+        title: 'İLLİK QİYMƏTLƏNDİRMƏ',
+        // header: () => <IllikHeaderComp />,
+      },
+    },
+    YarimillikSecim: {
+      screen: YarimillikSecim,
+      options: {
+        title: 'Yarımillik hesablama',
+        header: () => <YarimilSecimHeaderComp />,
       },
     },
     Profile: {

@@ -1,21 +1,22 @@
 {
   "expo": {
-    "name": "Yarimillikveillikhesablama",
+    "name": "Yarımillik və İllik hesablama",
     "slug": "Yarimillikveillikhesablama",
-    "version": "1.0.0",
+    "version": "1.9.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/main-logo.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "scheme": "yarimillikveillikhesablama",
+    "scheme": "yarimillikqiymetlendirme",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/main-logo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "pro.Niyaz.yarimillikqiymetlendirme"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +31,11 @@
         }
       ],
       "react-native-edge-to-edge"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ce57e6d3-41c8-4ad1-bd3b-627e3ddeee6b"
+      }
+    }
   }
 }
