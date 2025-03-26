@@ -14,20 +14,19 @@ export default function Header() {
     
     return (
         <View style={styles.top}>
-            
+            <View style={styles.backButtonContainer}>
+                <TouchableWithoutFeedback
+                    onPressIn={handlePressInBack}
+                    onPressOut={handlePressOutBack}
+                    onPress={handleBack}
+                >
+                    <View style={[styles.back, backPressed && styles.backPressed]}>
+                        <Image style={styles.icon} source={require('../../../assets/icons/back.png')} />
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
             
             <View style={styles.titleContainer}>
-                <View style={styles.backButtonContainer}>
-                    <TouchableWithoutFeedback
-                        onPressIn={handlePressInBack}
-                        onPressOut={handlePressOutBack}
-                        onPress={handleBack}
-                    >
-                        <View style={[styles.back, backPressed && styles.backPressed]}>
-                            <Image style={styles.icon} source={require('../../../assets/icons/back.png')} />
-                        </View>
-                    </TouchableWithoutFeedback>
-                </View>
                 <Image source={require('./../../assets/icons/semestr.png')} style={styles.logo} />
                 <Text style={styles.headerText}>YARIMİLLİK QİYMƏTLƏNDİRMƏ</Text>
             </View>

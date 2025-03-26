@@ -79,14 +79,13 @@ export function IllikHesabla() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={calcStyles.container}>
+    <SafeAreaView>
+      <View style={yearScoreStyles.container}>
         <View style={yearScoreStyles.inputRow}>
-
           <Text style={yearScoreStyles.label}>1-ci yarımil balı:</Text>
           <TextInput
             ref={semester1Ref}
-            style={[calcStyles.input, focus === 'Semester1' && calcStyles.inputFocus]}
+            style={[yearScoreStyles.input, focus === 'Semester1' && yearScoreStyles.focusedInput]}
             keyboardType="numeric"
             value={semester1}
             onChangeText={(text) => handleSemesterInput(text, setSemester1)}
@@ -96,11 +95,10 @@ export function IllikHesabla() {
             returnKeyType="next"
             onSubmitEditing={() => semester2Ref.current?.focus()}
           />
-
-          <Text style={yearScoreStyles.label}>2-ci yarımil balı:</Text>
+          <Text style={[yearScoreStyles.label, yearScoreStyles.secondLabel]}>2-ci yarımil balı:</Text>
           <TextInput
             ref={semester2Ref}
-            style={[calcStyles.input, focus === 'Semester2' && calcStyles.inputFocus]}
+            style={[yearScoreStyles.input, focus === 'Semester2' && yearScoreStyles.focusedInput]}
             keyboardType="numeric"
             value={semester2}
             onChangeText={(text) => handleSemesterInput(text, setSemester2)}
@@ -108,7 +106,6 @@ export function IllikHesabla() {
             onBlur={() => setFocus(null)}
             returnKeyType="done"
           />
-
         </View>
       </View>
 
@@ -151,30 +148,6 @@ export function IllikHesabla() {
   );
 }
 
-const calcStyles = StyleSheet.create({
-  container: {
-    width: '94%',
-    marginHorizontal: '3%',
-    marginVertical: 40,
-    flexDirection: 'row',
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    textAlign: 'center',
-    borderWidth: 1,
-    borderColor: '#5a94b5',
-    borderRadius: 5,
-    backgroundColor: '#e7f4f2',
-    marginTop: 5,
-    fontFamily: 'Calibri',
-    color: '#494949',
-  },
-  inputFocus: {
-    borderColor: '#5a94b5',
-    borderWidth: 2,
-  },
-});
 
 const resultStyles = StyleSheet.create({
   result: {
@@ -282,7 +255,6 @@ const buttonStyles = StyleSheet.create({
   },
 });
 
-
 const yearScoreStyles = StyleSheet.create({
   container: {
     width: '94%',
@@ -291,34 +263,35 @@ const yearScoreStyles = StyleSheet.create({
     marginBottom: 40,
   },
   inputRow: {
-    flexDirection: 'row', // Etiket ve input'ları aynı satıra yerleştiriyoruz
-    alignItems: 'center', // Dikey hizalama
-    marginBottom: 20, // Etiket ve input arasındaki boşluk
-    justifyContent: 'space-between', // Etiketler arasındaki boşluğu dengeleme
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'nowrap',
   },
   label: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#363636',
-    marginRight: 10, // Etiket ve input arasına boşluk
-    fontFamily: 'Calibri', // Calibri fontu
+    fontFamily: 'Calibri',
+    flexShrink: 1,
   },
   secondLabel: {
-    marginLeft: 5, // "2-ci yarımil balı"na sol margin ekliyoruz
+    marginLeft: 15,
   },
   input: {
-    width: 50, // Genişlik 50px
-    height: 50, // Yükseklik 50px
+    width: 50,
+    height: 50,
     borderWidth: 1,
     borderColor: '#5a94b5',
     borderRadius: 5,
     backgroundColor: '#e7f4f2',
     textAlign: 'center',
     fontSize: 16,
-    fontFamily: 'Calibri', // Calibri fontu
+    fontFamily: 'Calibri',
+    marginHorizontal: 5,
   },
   focusedInput: {
-    borderWidth: 2, // Outline efekti
+    borderWidth: 2,
     borderColor: '#5a94b5',
     borderRadius: 5,
   },

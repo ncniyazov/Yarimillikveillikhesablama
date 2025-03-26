@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export type HomeTabParamList = {
   Home: undefined;
@@ -16,4 +17,6 @@ export type RootNavigatorParamList = {
   Yarimil5KSQBSQ: { ksqCount: number; hasBigSummative: boolean };
   Yarimil6KSQBSQ: { ksqCount: number; hasBigSummative: boolean };
   // ... other screens ...
-}
+};
+
+export type RootStackNavigationProp = StackNavigationProp<RootNavigatorParamList>;

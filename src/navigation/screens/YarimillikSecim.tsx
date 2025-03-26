@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
-import {Yarimil6KSQBSQ} from "./YarimilHesabla/Yarimil6KSQBSQ";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { RootStackNavigationProp } from '../types';
 
 export function YarimillikSecim() {
   const [count, setCount] = useState(3);
@@ -12,7 +12,7 @@ export function YarimillikSecim() {
   const [isFocused, setIsFocused] = useState(false);
   const [pressedNext, setPressedNext] = useState(false);
   const [pressedBack, setPressedBack] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   const decrease = () => {
     if (count > 3) {
@@ -36,6 +36,7 @@ export function YarimillikSecim() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      
       <View style={styles.chooseCount}>
         <Text style={styles.label}> Yarımil ərzində keçirilmiş summativ qiymətləndirmələrin sayı:</Text>
         <View style={styles.selectNumber}>

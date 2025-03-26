@@ -4,20 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import MenuButton from "../components/ButtonComp";
 import Footer from "../components/FooterComp";
 import {YarimillikSecim} from "../screens/YarimillikSecim";
-import { IllikHesabla } from "../screens/IllikHesabla";
+import { IllikHesabla } from "./IllikHesabla/IllikHesabla";
+import { RootStackNavigationProp } from '../types';
 
 
 const HomeMenu = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const [pressed, setPressed] = useState(false);
 
   const navigateToYarimillikSecim = () => {
-    // @ts-ignore
     navigation.navigate('YarimillikSecim');
   };
 
   const navigateToIllikHesabla = () => {
-    // @ts-ignore
     navigation.navigate('IllikHesabla');
   };
 

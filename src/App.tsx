@@ -3,6 +3,7 @@ import { Asset } from 'expo-asset';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 import { Navigation } from './navigation';
+import { AppRegistry } from 'react-native';
 
 Asset.loadAsync([
   ...NavigationAssets,
@@ -28,3 +29,6 @@ export function App() {
     />
   );
 }
+
+// Register the component
+AppRegistry.registerComponent('yarimillikveillikhesablama', () => App);

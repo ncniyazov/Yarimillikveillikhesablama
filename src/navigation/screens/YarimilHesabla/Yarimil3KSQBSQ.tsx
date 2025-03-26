@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Pressable, TextInput, Alert, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert } from 'react-native';
+import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateSemesterScore } from '../../../utils/gradeCalculator';
+import Header from '../../components/YarimilHeaderComp';
+import { RootStackNavigationProp } from '../../types';
 
 type Props = {
   route: {
@@ -35,7 +38,7 @@ export function Yarimil3KSQBSQ({ route }: Props) {
   const ksq3Ref = React.useRef<TextInput>(null);
   const bsqRef = React.useRef<TextInput>(null);
   
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   // Handle input validation for KSQs
   const handleKsqInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
@@ -101,13 +104,10 @@ export function Yarimil3KSQBSQ({ route }: Props) {
     });
   };
 
-  // Handle back button
-  const handleBack = () => {
-    navigation.goBack();
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header />
+      
       <View style={calcStyles.container}>
         <TextInput
           ref={ksq1Ref}
@@ -203,37 +203,13 @@ export function Yarimil3KSQBSQ({ route }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    padding: 20,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-    color: '#363636',
-    fontFamily: 'Calibri',
-  },
-  info: {
-    fontSize: 16,
-    marginBottom: 10,
-    color: '#363636',
-    fontFamily: 'Calibri',
-  }
-});
-
 const calcStyles = StyleSheet.create({
   container: {
     width: '94%',
     marginHorizontal: '3%',
     marginVertical: 40,
     flexDirection: 'row',
+    flexWrap: 'wrap', // Allow wrapping for more inputs
     justifyContent: 'space-between',
   },
   input: {
@@ -245,7 +221,7 @@ const calcStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#e7f4f2',
     marginBottom: 3,
-    marginRight: 1,
+    marginRight: 5,
     minWidth: 40,
     fontFamily: 'Calibri',
     color: '#494949',

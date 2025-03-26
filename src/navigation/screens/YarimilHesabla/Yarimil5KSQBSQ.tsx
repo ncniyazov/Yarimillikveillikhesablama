@@ -4,6 +4,8 @@ import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateSemesterScore } from '../../../utils/gradeCalculator';
+import Header from '../../components/YarimilHeaderComp';
+import { RootStackNavigationProp } from '../../types';
 
 type Props = {
   route: {
@@ -40,7 +42,7 @@ export function Yarimil5KSQBSQ({ route }: Props) {
   const ksq5Ref = React.useRef<TextInput>(null);
   const bsqRef = React.useRef<TextInput>(null);
   
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   // Handle input validation for KSQs
   const handleKsqInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
@@ -116,7 +118,9 @@ export function Yarimil5KSQBSQ({ route }: Props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header />
+      
       <View style={calcStyles.container}>
         <TextInput
           ref={ksq1Ref}
@@ -241,8 +245,9 @@ const calcStyles = StyleSheet.create({
     width: '94%',
     marginHorizontal: '3%',
     marginVertical: 40,
-    flexDirection: 'row', // Aynı satırda dizilmesini sağlar
-    justifyContent: 'space-between', // Aralarındaki boşluğu eşit şekilde dağıtır
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Allow wrapping for more inputs
+    justifyContent: 'space-between',
   },
   input: {
     flex: 1,
@@ -252,59 +257,58 @@ const calcStyles = StyleSheet.create({
     borderColor: '#5a94b5',
     borderRadius: 5,
     backgroundColor: '#e7f4f2',
-    marginBottom: 3, // Aralarındaki boşluk
-    marginRight: 1, // Aralarındaki boşluk 1px
-    minWidth: 40, // Minimum genişlik belirledik, taşmasını engellemek için
-    fontFamily: 'Calibri', // Fontu Calibri olarak ayarladık
-    color: '#494949', // Metin rengini CSS'teki gibi ayarladık
+    marginBottom: 3,
+    marginRight: 5,
+    minWidth: 40,
+    fontFamily: 'Calibri',
+    color: '#494949',
   },
-  // Focus durumunda outline rengi ayarlandı
   inputFocus: {
     borderColor: '#5a94b5',
     borderWidth: 2,
   },
-})
+});
 
 const resultStyles = StyleSheet.create({
   result: {
-    width: 200, // Sabit genişlik
-    marginHorizontal: 'auto', // Ortalanmış
-    backgroundColor: '#f7f7f7', // Arka plan rengi
-    borderRadius: 5, // Kenar yuvarlama
-    flexDirection: 'row', // İki kolonu yan yana sıralar
-    padding: 10, // İçerik boşluğu
-    fontWeight: 'bold', // Yazı kalın
-    shadowColor: 'rgba(182, 182, 182, 0.733)', // Gölge rengi (iOS)
+    width: 200,
+    marginHorizontal: 'auto',
+    backgroundColor: '#f7f7f7',
+    borderRadius: 5,
+    flexDirection: 'row',
+    padding: 10,
+    fontWeight: 'bold',
+    shadowColor: 'rgba(182, 182, 182, 0.733)',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,
-    shadowRadius: 8, // Gölge yayılımı (iOS)
-    elevation: 5, // Android için gölge efekti
-    marginVertical: 10, // Üstten ve alttan 10px boşluk
+    shadowRadius: 8,
+    elevation: 5,
+    marginVertical: 10,
   },
   names: {
-    width: '80%', // Genişliğin %80'i
+    width: '80%',
     height: '100%',
   },
   scores: {
-    width: '20%', // Genişliğin %20'si
+    width: '20%',
     height: '100%',
-    color: 'rgb(182, 14, 14)', // Kırmızı renk
+    color: 'rgb(182, 14, 14)',
   },
   nameText: {
     fontSize: 16,
-    color: '#363636', // Metin rengi CSS'teki gibi koyu gri
-    fontWeight: 'bold', // Bold stil
-    marginBottom: 1, // Metinler arasına 6px boşluk
-    lineHeight: 20, // Satır yüksekliği
-    fontFamily: 'Calibri', // Fontu Calibri olarak ayarladık
+    color: '#363636',
+    fontWeight: 'bold',
+    marginBottom: 1,
+    lineHeight: 20,
+    fontFamily: 'Calibri',
   },
   scoreText: {
     fontSize: 16,
-    color: 'rgb(182, 14, 14)', // Skorlar için kırmızı renk
-    fontWeight: 'bold', // Bold stil
-    marginBottom: 1, // Metinler arasına 6px boşluk
-    lineHeight: 20, // Satır yüksekliği
-    fontFamily: 'Calibri', // Fontu Calibri olarak ayarladık
+    color: 'rgb(182, 14, 14)',
+    fontWeight: 'bold',
+    marginBottom: 1,
+    lineHeight: 20,
+    fontFamily: 'Calibri',
   },
 });
 
@@ -369,29 +373,4 @@ const buttonStyles = StyleSheet.create({
   resetPressed: {
     backgroundColor: 'rgb(170, 15, 10)',
   },
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    padding: 20,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-    color: '#363636',
-    fontFamily: 'Calibri',
-  },
-  info: {
-    fontSize: 16,
-    marginBottom: 10,
-    color: '#363636',
-    fontFamily: 'Calibri',
-  }
-});
+}); 

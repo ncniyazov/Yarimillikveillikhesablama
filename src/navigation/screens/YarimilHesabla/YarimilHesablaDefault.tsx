@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, TouchableWi
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateSemesterScore, calculateGrade } from '../../../utils/gradeCalculator';
-// import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Header from '../../components/YarimilHeaderComp';
 
 type Props = {
   route: {
@@ -28,7 +28,7 @@ export function YarimilHesablaDefault({ route }: Props) {
 
   const handlePressInNext = () => setNextPressed(true);
   const handlePressOutNext = () => setNextPressed(false);
-  // Create a dynamic array of KSQ values based on count
+
   const [ksqValues, setKsqValues] = useState<string[]>(Array(ksqCount).fill(''));
   const [bsq, setBsq] = useState<string>('');
   
@@ -168,6 +168,8 @@ export function YarimilHesablaDefault({ route }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+  
+      
       <View style={calcStyles.container}>
         {renderKsqInputs()}
         {hasBigSummative && (

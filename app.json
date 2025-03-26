@@ -8,6 +8,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "scheme": "yarimillikqiymetlendirme",
+    "entryPoint": "./index.js",
     "ios": {
       "supportsTablet": true
     },
