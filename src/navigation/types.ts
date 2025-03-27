@@ -5,12 +5,16 @@ export type HomeTabParamList = {
   Home: undefined;
   YarimillikSecim: undefined;
   IllikHesabla: undefined;
+  SSGB: undefined;
+  KVMF: undefined;
 };
 
 export type RootNavigatorParamList = {
   HomeTabs: NavigatorScreenParams<HomeTabParamList>;
   YarimillikSecim: undefined;
   IllikHesabla: undefined;
+  SSGB: undefined;
+  KVMF: undefined;
   YarimilHesablaDefault: { ksqCount: number; hasBigSummative: boolean };
   Yarimil3KSQBSQ: { ksqCount: number; hasBigSummative: boolean };
   Yarimil4KSQBSQ: { ksqCount: number; hasBigSummative: boolean };

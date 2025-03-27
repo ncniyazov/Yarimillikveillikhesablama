@@ -22,6 +22,8 @@ import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
 import { IllikHesabla } from './screens/IllikHesabla/IllikHesabla';
+import { SSGB } from './screens/SSGB/SSGB';
+import { KVMF } from './screens/KVMF/KVMF';
 import IllikHeaderComp from './components/IllikHeaderComp';
 import YarimilHeaderComp from './components/YarimilHeaderComp';
 import YarimilSecimHeaderComp from './components/YarimilSecimHeaderComp';
@@ -132,11 +134,25 @@ const RootStack = createNativeStackNavigator({
         // header: () => <IllikHeaderComp />,
       },
     },
+    SSGB: {
+      screen: SSGB,
+      options: {
+        title: 'SUAL SAYINA GÖRƏ BAL',
+        // header: () => <IllikHeaderComp />,
+      },
+    },
+    KVMF: {
+      screen: KVMF,
+      options: {
+        title: 'KEYFİYYƏT VƏ MÜVƏFFƏQİYYƏT FAİZİ',
+        // header: () => <IllikHeaderComp />,
+      },
+    },
     YarimillikSecim: {
       screen: YarimillikSecim,
       options: {
         title: 'Yarımillik hesablama',
-        // header: () => <YarimilSecimHeaderComp />,
+        headerShown: false,
       },
     },
     Profile: {

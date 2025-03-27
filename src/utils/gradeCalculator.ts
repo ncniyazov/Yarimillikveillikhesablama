@@ -21,7 +21,6 @@ export const validateInput = (value: string): string => {
   const numValue = parseInt(value, 10);
   if (isNaN(numValue)) return '';
   if (numValue < 1) return '1';
-  if (numValue > 100) return '100';
   
   return numValue.toString();
 };

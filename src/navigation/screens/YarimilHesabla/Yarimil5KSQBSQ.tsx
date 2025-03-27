@@ -50,7 +50,7 @@ export function Yarimil5KSQBSQ({ route }: Props) {
     
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('Xəta', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
       // Set the value to empty or to 100 (depending on desired behavior)
       setter('');
       return;
@@ -74,14 +74,14 @@ export function Yarimil5KSQBSQ({ route }: Props) {
     // Check if any fields are empty
     const hasEmptyFields = ksqValues.some(val => val === undefined);
     if (hasEmptyFields || (hasBigSummative && !bsqValue)) {
-      Alert.alert('Xəta', 'Bütün xanaları doldurun!');
+      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
       return;
     }
     
     // Check if any value is over 100
     const hasValueOver100 = [...ksqValues, bsqValue].some(val => val !== undefined && val > 100);
     if (hasValueOver100) {
-      Alert.alert('Xəta', 'BSQ dəyəri 100-dən çox ola bilməz!');
+      Alert.alert('DİQQƏT!', 'BSQ dəyəri 100-dən çox ola bilməz!');
       return;
     }
     

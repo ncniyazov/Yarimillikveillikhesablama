@@ -5,6 +5,7 @@ import MenuButton from "../components/ButtonComp";
 import Footer from "../components/FooterComp";
 import {YarimillikSecim} from "../screens/YarimillikSecim";
 import { IllikHesabla } from "./IllikHesabla/IllikHesabla";
+import { SSGB } from "./SSGB/SSGB";
 import { RootStackNavigationProp } from '../types';
 
 
@@ -18,6 +19,12 @@ const HomeMenu = () => {
 
   const navigateToIllikHesabla = () => {
     navigation.navigate('IllikHesabla');
+  };
+  const navigateToSSGB = () => {
+    navigation.navigate('SSGB');
+  };
+  const navigateToKVMF = () => {
+    navigation.navigate('KVMF');
   };
 
   return (
@@ -49,7 +56,7 @@ const HomeMenu = () => {
         <TouchableOpacity
           style={[styles.button, pressed && styles.buttonActive]}
           activeOpacity={0.8}
-          onPress={navigateToIllikHesabla}
+          onPress={navigateToSSGB}
         >
           <Image source={require('../../assets/icons/questions.png')} style={homeMenuStyles.cardImage} />
           <Text style={homeMenuStyles.cardTitle}>SUAL SAYINA GÖRƏ BAL</Text>
@@ -57,7 +64,7 @@ const HomeMenu = () => {
         <TouchableOpacity
           style={[styles.button, pressed && styles.buttonActive]}
           activeOpacity={0.8}
-          onPress={navigateToIllikHesabla}
+          onPress={navigateToKVMF}
         >
           <Image source={require('../../assets/icons/percent.png')} style={homeMenuStyles.cardImage} />
           <Text style={homeMenuStyles.cardTitle}>KEYFİYYƏT VƏ MÜVƏFFƏQİYYƏT FAİZİ</Text>

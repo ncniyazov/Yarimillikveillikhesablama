@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateGrade } from '../../../utils/gradeCalculator';
 
-export function IllikHesabla() {
+export function SSGB() {
   // State for the two semester scores
-  const [semester1, setSemester1] = useState<string>('');
-  const [semester2, setSemester2] = useState<string>('');
+  const [questioncount, setQuestioncount] = useState<string>('');
+  const [correctcount, setCorrectcount] = useState<string>('');
 
   const [focus, setFocus] = useState<string | null>(null);
   const [pressedButton, setPressedButton] = useState<string | null>(null);
@@ -17,15 +17,15 @@ export function IllikHesabla() {
   });
 
   // Create refs for TextInput components
-  const semester1Ref = useRef<TextInput>(null);
-  const semester2Ref = useRef<TextInput>(null);
+  const questioncountRef = useRef<TextInput>(null);
+  const correctcountRef = useRef<TextInput>(null);
 
   const navigation = useNavigation();
 
-  // Handle input validation for semester scores
-  const handleSemesterInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
+  // Handle input validation for scores
+  const handleScoreInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     const validatedValue = validateInput(value);
-
+    
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
       Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
@@ -33,45 +33,45 @@ export function IllikHesabla() {
       setter('');
       return;
     }
-
+    
     setter(validatedValue);
   };
 
   // Calculate yearly score (average of two semesters)
   const calculateYearlyScore = () => {
     // Convert string values to numbers
-    const semester1Value = semester1 ? Number(semester1) : undefined;
-    const semester2Value = semester2 ? Number(semester2) : undefined;
+    const questioncountValue = questioncount ? Number(questioncount) : undefined;
+    const correctcountValue = correctcount ? Number(correctcount) : undefined;
 
     // Check if any fields are empty
-    if (semester1Value === undefined || semester2Value === undefined) {
+    if (questioncountValue === undefined || correctcountValue === undefined) {
       Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
       return;
     }
 
     // Check if any value is over 100
-    if (semester1Value > 100 || semester2Value > 100) {
-      Alert.alert('DİQQƏT!', 'Semester balı 100-dən çox ola bilməz!');
+    if (correctcountValue > questioncountValue) {
+      Alert.alert('DİQQƏT!', 'Cavab sayı ümumi sual sayıdan çox ola bilməz!');
       return;
     }
 
     // Calculate the average of the two semester scores
-    const yearlyAverage = (semester1Value + semester2Value) / 2;
+    const testBal = correctcountValue * 100 / questioncountValue;
 
     // Calculate the grade based on the yearly average
-    const grade = calculateGrade(yearlyAverage);
+    const grade = calculateGrade(testBal);
 
     // Update the calculation result
     setCalculationResult({
-      totalScore: parseFloat(yearlyAverage.toFixed(1)),
+      totalScore: parseFloat(testBal.toFixed(1)),
       grade
     });
   };
 
   // Reset all values
   const resetValues = () => {
-    setSemester1('');
-    setSemester2('');
+    setQuestioncount('');
+    setCorrectcount('');
     setCalculationResult({
       totalScore: 0,
       grade: 2
@@ -82,27 +82,27 @@ export function IllikHesabla() {
     <SafeAreaView>
       <View style={yearScoreStyles.container}>
         <View style={yearScoreStyles.inputRow}>
-          <Text style={yearScoreStyles.label}>1-ci yarımil balı:</Text>
+          <Text style={yearScoreStyles.label}>Ümumi sual sayı:</Text>
           <TextInput
-            ref={semester1Ref}
-            style={[yearScoreStyles.input, focus === 'Semester1' && yearScoreStyles.focusedInput]}
+            ref={questioncountRef}
+            style={[yearScoreStyles.input, focus === 'questioncount' && yearScoreStyles.focusedInput]}
             keyboardType="numeric"
-            value={semester1}
-            onChangeText={(text) => handleSemesterInput(text, setSemester1)}
+            value={questioncount}
+            onChangeText={(text) => handleScoreInput(text, setQuestioncount)}
             autoFocus={true}
-            onFocus={() => setFocus('Semester1')}
+            onFocus={() => setFocus('questioncount')}
             onBlur={() => setFocus(null)}
             returnKeyType="next"
-            onSubmitEditing={() => semester2Ref.current?.focus()}
+            onSubmitEditing={() => correctcountRef.current?.focus()}
           />
-          <Text style={[yearScoreStyles.label, yearScoreStyles.secondLabel]}>2-ci yarımil balı:</Text>
+          <Text style={[yearScoreStyles.label, yearScoreStyles.secondLabel]}>Düzgün cavab sayı:</Text>
           <TextInput
-            ref={semester2Ref}
-            style={[yearScoreStyles.input, focus === 'Semester2' && yearScoreStyles.focusedInput]}
+            ref={correctcountRef}
+            style={[yearScoreStyles.input, focus === 'correctcount' && yearScoreStyles.focusedInput]}
             keyboardType="numeric"
-            value={semester2}
-            onChangeText={(text) => handleSemesterInput(text, setSemester2)}
-            onFocus={() => setFocus('Semester2')}
+            value={correctcount}
+            onChangeText={(text) => handleScoreInput(text, setCorrectcount)}
+            onFocus={() => setFocus('correctcount')}
             onBlur={() => setFocus(null)}
             returnKeyType="done"
           />
@@ -111,8 +111,8 @@ export function IllikHesabla() {
 
       <View style={resultStyles.result}>
         <View style={resultStyles.names}>
-          <Text style={resultStyles.nameText}>İllik bal:</Text>
-          <Text style={resultStyles.nameText}>İllik qiymət:</Text>
+          <Text style={resultStyles.nameText}>Test üzrə bal:</Text>
+          <Text style={resultStyles.nameText}>Test üzrə qiymət:</Text>
         </View>
         <View style={resultStyles.scores}>
           <Text style={resultStyles.scoreText}>{calculationResult.totalScore}</Text>

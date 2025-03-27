@@ -34,6 +34,11 @@ export function YarimillikSecim() {
     });
   };
 
+  const navigateToHome = () => {
+    // Navigate back to the main screen (Home)
+    navigation.navigate('HomeTabs', { screen: 'Home' });
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       
@@ -78,6 +83,7 @@ export function YarimillikSecim() {
           onPressIn={() => setPressedBack(true)}
           onPressOut={() => setPressedBack(false)}
           activeOpacity={1} 
+          onPress={navigateToHome}
         >
           <Text style={[styles.buttonTextGeriIrreli, styles.backText, styles.calibriFont]}>GERİ</Text>
         </TouchableOpacity>
