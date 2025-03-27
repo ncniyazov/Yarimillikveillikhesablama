@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateGrade } from '../../../utils/gradeCalculator';
+import { ALERT_TITLE, SCORE_TOO_HIGH, EMPTY_FIELDS, SEMESTER_SCORE_TOO_HIGH } from '../../../utils/errorMessages';
+import { FIELDS_RESET } from '../../../utils/toastMessages';
 
 export function IllikHesabla() {
   // State for the two semester scores
@@ -28,7 +30,7 @@ export function IllikHesabla() {
 
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
       // Set the value to empty
       setter('');
       return;
@@ -45,13 +47,13 @@ export function IllikHesabla() {
 
     // Check if any fields are empty
     if (semester1Value === undefined || semester2Value === undefined) {
-      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
+      Alert.alert(ALERT_TITLE, EMPTY_FIELDS);
       return;
     }
 
     // Check if any value is over 100
     if (semester1Value > 100 || semester2Value > 100) {
-      Alert.alert('DİQQƏT!', 'Semester balı 100-dən çox ola bilməz!');
+      Alert.alert(ALERT_TITLE, SEMESTER_SCORE_TOO_HIGH);
       return;
     }
 
@@ -76,6 +78,18 @@ export function IllikHesabla() {
       totalScore: 0,
       grade: 2
     });
+    
+    // Show toast message at the top of the screen
+    ToastAndroid.showWithGravity(
+      FIELDS_RESET,
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
+    
+    // Set focus on the first input field
+    setTimeout(() => {
+      semester1Ref.current?.focus();
+    }, 100);
   };
 
   return (

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, ToastAndroid } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateSemesterScore } from '../../../utils/gradeCalculator';
+import { ALERT_TITLE, SCORE_TOO_HIGH, EMPTY_FIELDS, BSQ_TOO_HIGH } from '../../../utils/errorMessages';
+import { FIELDS_RESET } from '../../../utils/toastMessages';
 import Header from '../../components/YarimilHeaderComp';
 import { RootStackNavigationProp } from '../../types';
 
@@ -46,7 +48,7 @@ export function Yarimil3KSQBSQ({ route }: Props) {
     
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
       // Set the value to empty or to 100 (depending on desired behavior)
       setter('');
       return;
@@ -68,14 +70,14 @@ export function Yarimil3KSQBSQ({ route }: Props) {
     // Check if any fields are empty
     const hasEmptyFields = ksqValues.some(val => val === undefined);
     if (hasEmptyFields || (hasBigSummative && !bsqValue)) {
-      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
+      Alert.alert(ALERT_TITLE, EMPTY_FIELDS);
       return;
     }
     
     // Check if any value is over 100
     const hasValueOver100 = [...ksqValues, bsqValue].some(val => val !== undefined && val > 100);
     if (hasValueOver100) {
-      Alert.alert('DİQQƏT!', 'BSQ dəyəri 100-dən çox ola bilməz!');
+      Alert.alert(ALERT_TITLE, BSQ_TOO_HIGH);
       return;
     }
     
@@ -102,6 +104,18 @@ export function Yarimil3KSQBSQ({ route }: Props) {
       ksqPercentage: 0,
       bsqPercentage: 0
     });
+    
+    // Show toast message at the top of the screen
+    ToastAndroid.showWithGravity(
+      FIELDS_RESET,
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
+    
+    // Set focus on the first input field
+    setTimeout(() => {
+      ksq1Ref.current?.focus();
+    }, 100);
   };
 
   return (

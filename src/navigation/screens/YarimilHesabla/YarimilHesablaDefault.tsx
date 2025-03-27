@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, TouchableWithoutFeedback, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateSemesterScore, calculateGrade } from '../../../utils/gradeCalculator';
+import { ALERT_TITLE, SCORE_TOO_HIGH, EMPTY_FIELDS, BSQ_TOO_HIGH } from '../../../utils/errorMessages';
+import { FIELDS_RESET } from '../../../utils/toastMessages';
 import Header from '../../components/YarimilHeaderComp';
 
 type Props = {
@@ -52,27 +54,26 @@ export function YarimilHesablaDefault({ route }: Props) {
     
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
       // Set the value to empty
-      const newKsqValues = [...ksqValues];
-      newKsqValues[index] = '';
-      setKsqValues(newKsqValues);
+      const newValues = [...ksqValues];
+      newValues[index] = '';
+      setKsqValues(newValues);
       return;
     }
     
-    // Update the specific KSQ value
-    const newKsqValues = [...ksqValues];
-    newKsqValues[index] = validatedValue;
-    setKsqValues(newKsqValues);
+    const newValues = [...ksqValues];
+    newValues[index] = validatedValue;
+    setKsqValues(newValues);
   };
 
-  // Handle BSQ input validation
+  // Handle input validation for BSQ
   const handleBsqInput = (value: string) => {
     const validatedValue = validateInput(value);
     
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
       // Set the value to empty
       setBsq('');
       return;
@@ -90,14 +91,14 @@ export function YarimilHesablaDefault({ route }: Props) {
     // Check if any fields are empty
     const hasEmptyFields = numericKsqValues.some(val => val === undefined);
     if (hasEmptyFields || (hasBigSummative && !bsqValue)) {
-      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
+      Alert.alert(ALERT_TITLE, EMPTY_FIELDS);
       return;
     }
     
     // Check if any value is over 100
     const hasValueOver100 = [...numericKsqValues, bsqValue].some(val => val !== undefined && val > 100);
     if (hasValueOver100) {
-      Alert.alert('DİQQƏT!', 'BSQ dəyəri 100-dən çox ola bilməz!');
+      Alert.alert(ALERT_TITLE, BSQ_TOO_HIGH);
       return;
     }
     
@@ -130,14 +131,31 @@ export function YarimilHesablaDefault({ route }: Props) {
 
   // Reset all values
   const resetValues = () => {
+    // Reset KSQ values
     setKsqValues(Array(ksqCount).fill(''));
+    // Reset BSQ value
     setBsq('');
+    // Reset calculation result
     setCalculationResult({
       totalScore: 0,
       grade: 2,
       ksqPercentage: 0,
       bsqPercentage: 0
     });
+    
+    // Show toast message at the top of the screen
+    ToastAndroid.showWithGravity(
+      FIELDS_RESET,
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
+    
+    // Set focus on the first input field
+    setTimeout(() => {
+      if (inputRefs.current.length > 0) {
+        inputRefs.current[0]?.focus();
+      }
+    }, 100);
   };
 
   // Generate KSQ input fields dynamically based on count

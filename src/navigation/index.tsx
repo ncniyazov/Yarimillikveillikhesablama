@@ -144,7 +144,7 @@ const RootStack = createNativeStackNavigator({
     KVMF: {
       screen: KVMF,
       options: {
-        title: 'KEYFİYYƏT VƏ MÜVƏFFƏQİYYƏT FAİZİ',
+        title: 'Keyfiyyət və müvəffəqiyyət faizi',
         // header: () => <IllikHeaderComp />,
       },
     },

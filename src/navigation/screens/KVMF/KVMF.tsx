@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateGrade } from '../../../utils/gradeCalculator';
+import { ALERT_TITLE, STUDENT_COUNT_INVALID, EMPTY_FIELDS, GRADE_STUDENT_COUNT_EXCEEDS } from '../../../utils/errorMessages';
+import { FIELDS_RESET } from '../../../utils/toastMessages';
 
 export function KVMF() {
   // State for the two Score scores
@@ -30,7 +32,7 @@ export function KVMF() {
 
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 1000000) {
-      Alert.alert('DİQQƏT!', 'Şagird sayının düzgünlüyündən əmin olun!');
+      Alert.alert(ALERT_TITLE, STUDENT_COUNT_INVALID);
       // Set the value to empty
       setter('');
       return;
@@ -48,26 +50,26 @@ export function KVMF() {
 
     // Check if any fields are empty
     if (studentcountValue === undefined || marktwocountValue === undefined || markfourandfivecountValue === undefined) {
-      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
+      Alert.alert(ALERT_TITLE, EMPTY_FIELDS);
       return;
     }
 
     // Check if student count is correct
-    if ((marktwocountValue + markfourandfivecountValue ) > studentcountValue) {
-      Alert.alert('DİQQƏT!', ' "2", "4" və "5" qiyməti alan şagirdlərin sayı ümumi şagird sayıdan çox ola bilməz!');
+    if ((marktwocountValue + markfourandfivecountValue) > studentcountValue) {
+      Alert.alert(ALERT_TITLE, GRADE_STUDENT_COUNT_EXCEEDS);
       return;
     }
 
     const mfScore = markfourandfivecountValue * 100 / studentcountValue;
 
     const kfScore = ((studentcountValue - marktwocountValue) / studentcountValue) * 100;
-    
+
 
     // Update the calculation result
     setCalculationResult({
       kfScore: parseFloat(kfScore.toFixed(1)),
       mfScore: parseFloat(mfScore.toFixed(1))
-      
+
     });
   };
 
@@ -80,6 +82,18 @@ export function KVMF() {
       kfScore: 0,
       mfScore: 0
     });
+
+    // Show toast message at the top of the screen
+    ToastAndroid.showWithGravity(
+      FIELDS_RESET,
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
+    
+    // Set focus on the first input field
+    setTimeout(() => {
+      studentcountRef.current?.focus();
+    }, 100);
   };
 
   return (
@@ -99,6 +113,8 @@ export function KVMF() {
             returnKeyType="next"
             onSubmitEditing={() => marktwocountRef.current?.focus()}
           />
+        </View>
+        <View style={kvmfScoreStyles.inputRow}>
           <Text style={kvmfScoreStyles.label}>"2" qiyməti alan şagirdlərin sayı:</Text>
           <TextInput
             ref={marktwocountRef}
@@ -106,13 +122,14 @@ export function KVMF() {
             keyboardType="numeric"
             value={marktwocount}
             onChangeText={(text) => handleScoreInput(text, setMarktwocount)}
-            autoFocus={true}
             onFocus={() => setFocus('marktwocount')}
             onBlur={() => setFocus(null)}
             returnKeyType="next"
             onSubmitEditing={() => markfourandfivecountRef.current?.focus()}
           />
-          <Text style={[kvmfScoreStyles.label, kvmfScoreStyles.secondLabel]}>"4" və "5" qiyməti alan şagirdlərin sayı:</Text>
+        </View>
+        <View style={kvmfScoreStyles.inputRow}>
+          <Text style={kvmfScoreStyles.label}>"4" və "5" qiyməti alan şagirdlərin sayı:</Text>
           <TextInput
             ref={markfourandfivecountRef}
             style={[kvmfScoreStyles.input, focus === 'markfourandfivecount' && kvmfScoreStyles.focusedInput]}
@@ -168,7 +185,7 @@ export function KVMF() {
 
 const resultStyles = StyleSheet.create({
   result: {
-    width: 200,
+    width: 220,
     marginHorizontal: 'auto',
     backgroundColor: '#f7f7f7',
     borderRadius: 5,
@@ -279,13 +296,14 @@ const kvmfScoreStyles = StyleSheet.create({
     marginTop: 80,
     marginBottom: 40,
     flexDirection: 'column',
-    gap: 5,
+    gap: 15,
   },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // flexWrap: 'nowrap',
+    marginBottom: 10,
+    marginStart: 10
   },
   label: {
     fontSize: 16,
@@ -293,9 +311,7 @@ const kvmfScoreStyles = StyleSheet.create({
     color: '#363636',
     fontFamily: 'Calibri',
     flexShrink: 1,
-  },
-  secondLabel: {
-    marginLeft: 15,
+    width: '75%',
   },
   input: {
     width: 50,
@@ -307,7 +323,8 @@ const kvmfScoreStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontFamily: 'Calibri',
-    marginHorizontal: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   focusedInput: {
     borderWidth: 2,

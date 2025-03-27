@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, TextInput, Alert, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { validateInput, calculateGrade } from '../../../utils/gradeCalculator';
+import { ALERT_TITLE, SCORE_TOO_HIGH, EMPTY_FIELDS, ANSWERS_EXCEED_QUESTIONS } from '../../../utils/errorMessages';
+import { FIELDS_RESET } from '../../../utils/toastMessages';
 
 export function SSGB() {
   // State for the two semester scores
@@ -28,7 +30,7 @@ export function SSGB() {
     
     // Check if the value is greater than 100
     if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert('DİQQƏT!', 'Bal 100-dən yüksək ola bilməz!');
+      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
       // Set the value to empty
       setter('');
       return;
@@ -45,13 +47,13 @@ export function SSGB() {
 
     // Check if any fields are empty
     if (questioncountValue === undefined || correctcountValue === undefined) {
-      Alert.alert('DİQQƏT!', 'Bütün xanaları doldurun!');
+      Alert.alert(ALERT_TITLE, EMPTY_FIELDS);
       return;
     }
 
     // Check if any value is over 100
     if (correctcountValue > questioncountValue) {
-      Alert.alert('DİQQƏT!', 'Cavab sayı ümumi sual sayıdan çox ola bilməz!');
+      Alert.alert(ALERT_TITLE, ANSWERS_EXCEED_QUESTIONS);
       return;
     }
 
@@ -76,16 +78,28 @@ export function SSGB() {
       totalScore: 0,
       grade: 2
     });
+    
+    // Show toast message at the top of the screen
+    ToastAndroid.showWithGravity(
+      FIELDS_RESET,
+      ToastAndroid.SHORT,
+      ToastAndroid.TOP
+    );
+    
+    // Set focus on the first input field
+    setTimeout(() => {
+      questioncountRef.current?.focus();
+    }, 100);
   };
 
   return (
     <SafeAreaView>
-      <View style={yearScoreStyles.container}>
-        <View style={yearScoreStyles.inputRow}>
-          <Text style={yearScoreStyles.label}>Ümumi sual sayı:</Text>
+      <View style={ssgbScoreStyles.container}>
+        <View style={ssgbScoreStyles.inputRow}>
+          <Text style={ssgbScoreStyles.label}>Ümumi sual sayı:</Text>
           <TextInput
             ref={questioncountRef}
-            style={[yearScoreStyles.input, focus === 'questioncount' && yearScoreStyles.focusedInput]}
+            style={[ssgbScoreStyles.input, focus === 'questioncount' && ssgbScoreStyles.focusedInput]}
             keyboardType="numeric"
             value={questioncount}
             onChangeText={(text) => handleScoreInput(text, setQuestioncount)}
@@ -95,10 +109,12 @@ export function SSGB() {
             returnKeyType="next"
             onSubmitEditing={() => correctcountRef.current?.focus()}
           />
-          <Text style={[yearScoreStyles.label, yearScoreStyles.secondLabel]}>Düzgün cavab sayı:</Text>
+        </View>
+        <View style={ssgbScoreStyles.inputRow}>
+          <Text style={ssgbScoreStyles.label}>Düzgün cavab sayı:</Text>
           <TextInput
             ref={correctcountRef}
-            style={[yearScoreStyles.input, focus === 'correctcount' && yearScoreStyles.focusedInput]}
+            style={[ssgbScoreStyles.input, focus === 'correctcount' && ssgbScoreStyles.focusedInput]}
             keyboardType="numeric"
             value={correctcount}
             onChangeText={(text) => handleScoreInput(text, setCorrectcount)}
@@ -255,18 +271,22 @@ const buttonStyles = StyleSheet.create({
   },
 });
 
-const yearScoreStyles = StyleSheet.create({
+const ssgbScoreStyles = StyleSheet.create({
   container: {
     width: '94%',
     marginHorizontal: '3%',
     marginTop: 80,
     marginBottom: 40,
+    flexDirection: 'column',
+    gap: 15,
   },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexWrap: 'nowrap',
+    marginBottom: 10,
+    marginStart: 10,
+    
   },
   label: {
     fontSize: 16,
@@ -274,9 +294,10 @@ const yearScoreStyles = StyleSheet.create({
     color: '#363636',
     fontFamily: 'Calibri',
     flexShrink: 1,
+    width: '75%',
   },
   secondLabel: {
-    marginLeft: 15,
+    marginLeft: 0,
   },
   input: {
     width: 50,
@@ -288,7 +309,8 @@ const yearScoreStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontFamily: 'Calibri',
-    marginHorizontal: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   focusedInput: {
     borderWidth: 2,
