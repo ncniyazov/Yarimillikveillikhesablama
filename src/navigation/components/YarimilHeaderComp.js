@@ -14,7 +14,7 @@ export default function Header() {
     
     return (
         <View style={styles.top}>
-            <View style={styles.backButtonContainer}>
+            {/* <View style={styles.backButtonContainer}>
                 <TouchableWithoutFeedback
                     onPressIn={handlePressInBack}
                     onPressOut={handlePressOutBack}
@@ -24,7 +24,7 @@ export default function Header() {
                         <Image style={styles.icon} source={require('../../../assets/icons/back.png')} />
                     </View>
                 </TouchableWithoutFeedback>
-            </View>
+            </View> */}
             
             <View style={styles.titleContainer}>
                 <Image source={require('./../../assets/icons/semestr.png')} style={styles.logo} />
@@ -36,7 +36,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     top: {
-        marginTop: 40,
+        marginTop: 50,
         backgroundColor: 'rgba(231, 227, 227, 0.32)',
         width: '94%',
         marginHorizontal: '3%',

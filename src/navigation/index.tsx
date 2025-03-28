@@ -152,7 +152,7 @@ const RootStack = createNativeStackNavigator({
       screen: YarimillikSecim,
       options: {
         title: 'Yarımillik hesablama',
-        headerShown: false,
+        header: () => <YarimilHeaderComp />
       },
     },
     Profile: {
