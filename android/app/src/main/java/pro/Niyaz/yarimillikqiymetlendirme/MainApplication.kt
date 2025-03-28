@@ -1,4 +1,4 @@
-package com.yarmillikvillikhesablama
+package pro.Niyaz.yarimillikqiymetlendirme
 
 import android.app.Application
 import android.content.res.Configuration

@@ -1,4 +1,4 @@
-package com.yarmillikvillikhesablama
+package pro.Niyaz.yarimillikqiymetlendirme
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
