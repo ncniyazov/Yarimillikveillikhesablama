@@ -27,20 +27,12 @@ export function SSGB() {
   // Handle input validation for scores
   const handleScoreInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
     const validatedValue = validateInput(value);
-    
-    // Check if the value is greater than 100
-    if (validatedValue && Number(validatedValue) > 100) {
-      Alert.alert(ALERT_TITLE, SCORE_TOO_HIGH);
-      // Set the value to empty
-      setter('');
-      return;
-    }
-    
+       
     setter(validatedValue);
   };
 
-  // Calculate yearly score (average of two semesters)
-  const calculateYearlyScore = () => {
+ 
+  const calculateSSGBScore = () => {
     // Convert string values to numbers
     const questioncountValue = questioncount ? Number(questioncount) : undefined;
     const correctcountValue = correctcount ? Number(correctcount) : undefined;
@@ -142,7 +134,7 @@ export function SSGB() {
             style={[buttonStyles.button, buttonStyles.next, pressedButton === 'next' && buttonStyles.nextPressed]}
             onPressIn={() => setPressedButton('next')}
             onPressOut={() => setPressedButton(null)}
-            onPress={calculateYearlyScore}
+            onPress={calculateSSGBScore}
           >
             <Text style={[buttonStyles.buttonText, buttonStyles.nextText]}>HESABLA</Text>
           </Pressable>
